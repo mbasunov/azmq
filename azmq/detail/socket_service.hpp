@@ -30,7 +30,7 @@
 #include <boost/system/system_error.hpp>
 #include <boost/container/flat_map.hpp>
 #include <boost/thread/mutex.hpp>
-#include <boost/thread/lock_guard.hpp>
+#include <boost/thread/locks.hpp>
 
 #include <memory>
 #include <typeindex>

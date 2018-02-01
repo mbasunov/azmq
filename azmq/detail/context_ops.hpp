@@ -15,7 +15,8 @@
 #include <boost/assert.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/thread/mutex.hpp>
-#include <boost/thread/lock_guard.hpp>
+#include <boost/thread/locks.hpp>
+#include <boost/version.hpp>
 
 #include <zmq.h>
 
@@ -36,7 +37,11 @@ namespace detail {
         }
 
         static context_type get_context(bool create_new = false) {
+#if BOOST_VERSION < 104900
+            static boost::mutex mtx;
+#else
             static lock_type::mutex_type mtx;
+#endif
             static std::weak_ptr<void> ctx;
 
             if (create_new) return ctx_new();
