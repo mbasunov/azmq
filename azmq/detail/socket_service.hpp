@@ -326,9 +326,9 @@ namespace detail {
             return ec;
         }
 
-        boost::system::error_code shutdown(implementation_type & impl,
-                                           shutdown_type what,
-                                           boost::system::error_code & ec) {
+        boost::system::error_code descriptor_shutdown(implementation_type & impl,
+                                                      shutdown_type what,
+                                                      boost::system::error_code & ec) {
             unique_lock l{ *impl };
             if (impl->shutdown_ < what)
                 impl->shutdown_ = what;
@@ -645,7 +645,7 @@ namespace detail {
             }
 
             friend
-            bool asio_handler_is_continuation(deferred_completion* handler) { return true; }
+            bool asio_handler_is_continuation(deferred_completion* /*handler*/) { return true; }
         };
 
         descriptor_map descriptors_;
